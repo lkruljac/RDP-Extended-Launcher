@@ -56,6 +56,39 @@ npm run tauri build -- --bundles msi
 
 Installers are placed in `src-tauri/target/release/bundle/`.
 
+## GitHub Releases
+
+This repository is configured to create real Windows release assets through GitHub Actions.
+
+### What the workflow does
+
+- Pushes to `main` and pull requests only validate that the app builds successfully.
+- Pushing a tag that starts with `v` creates a **draft GitHub Release**.
+- The release includes the Tauri-generated Windows installer and bundle artifacts, not just GitHub's default source code zip files.
+
+### How to publish a release
+
+1. Update the version in [app/package.json](../app/package.json) and [app/src-tauri/tauri.conf.json](../app/src-tauri/tauri.conf.json).
+2. Commit and push the version change to `main`.
+3. Create and push a version tag:
+
+```powershell
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+4. Open the repository's Releases page on GitHub.
+5. Open the draft release created by the workflow.
+6. Review the attached assets and publish the release.
+
+### Expected assets
+
+Depending on the active Tauri bundle targets, GitHub Releases will include assets such as:
+
+- `.msi`
+- `setup.exe`
+- updater metadata files, if updater support is enabled later
+
 ## Troubleshooting
 
 **`npm: command not found`**  
