@@ -2,15 +2,15 @@ name: Build and Release
 
 on:
   pull_request:
-    branches: [main]
+    branches: [master]
   push:
-    branches: [main]
+    branches: [master]
     tags:
       - 'v*'
 
 jobs:
   validate:
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/master'
     runs-on: windows-latest
 
     steps:
